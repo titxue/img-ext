@@ -30,26 +30,6 @@
       "destination": "/api/index.py"
     }
   ],
-  "headers": [
-    {
-      "source": "/(.*.(css|js|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot))$",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    },
-    {
-      "source": "/(.*.html)$",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=0, must-revalidate"
-        }
-      ]
-    }
-  ],
   "functions": {
     "api/index.py": {
       "runtime": "python3.9",
