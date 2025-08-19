@@ -1,8 +1,8 @@
 from fastapi import FastAPI, File, UploadFile, HTTPException, status, Query, Request
 from fastapi.responses import JSONResponse, HTMLResponse
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.staticfiles import StaticFiles
-from fastapi.templating import Jinja2Templates
+# from fastapi.staticfiles import StaticFiles  # Vercel部署时注释掉
+# from fastapi.templating import Jinja2Templates  # Vercel部署时注释掉
 from pydantic import BaseModel, Field
 from typing import List, Optional, Union
 import numpy as np
@@ -28,11 +28,11 @@ app = FastAPI(
     redoc_url="/redoc"
 )
 
-# 挂载静态文件
-app.mount("/static", StaticFiles(directory="static"), name="static")
+# 挂载静态文件 (Vercel部署时注释掉)
+# app.mount("/static", StaticFiles(directory="static"), name="static")
 
-# 设置模板
-templates = Jinja2Templates(directory="templates")
+# 设置模板 (Vercel部署时注释掉)
+# templates = Jinja2Templates(directory="templates")
 
 # 添加CORS中间件
 app.add_middleware(
