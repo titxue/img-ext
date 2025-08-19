@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图像特征提取器 - API测试页面</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-image"></i> 图像特征提取器 API 测试</h1>
+            <div class="api-status" id="apiStatus">
+                <span class="status-indicator" id="statusIndicator"></span>
+                <span id="statusText">检查API状态中...</span>
+            </div>
+        </header>
+
+        <div class="tabs">
+            <button class="tab-button active" onclick="showTab('single')">单张图像测试</button>
+            <button class="tab-button" onclick="showTab('batch')">批量处理测试</button>
+            <button class="tab-button" onclick="showTab('info')">系统信息</button>
+        </div>
+
+        <!-- 单张图像测试 -->
+        <div id="singleTab" class="tab-content active">
+            <div class="upload-section">
+                <h2>单张图像特征提取</h2>
+                <div class="upload-area" id="singleUploadArea">
+                    <div class="upload-placeholder">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>拖拽图像文件到此处或点击选择</p>
+                        <p class="file-info">支持 JPG, PNG, GIF 格式</p>
+                    </div>
+                    <input type="file" id="singleFileInput" accept="image/*" style="display: none;">
+                </div>
+                <div class="image-preview" id="singlePreview" style="display: none;">
+                    <img id="singlePreviewImg" alt="预览图像">
+                    <button class="remove-btn" onclick="removeSingleImage()"><i class="fas fa-times"></i></button>
+                </div>
+                <button id="singleExtractBtn" class="extract-btn" disabled onclick="extractSingleFeatures()">
+                    <i class="fas fa-cog"></i> 提取特征
+                </button>
+            </div>
+            <div class="result-section" id="singleResult" style="display: none;">
+                <h3>提取结果</h3>
+                <div class="result-content" id="singleResultContent"></div>
+            </div>
+        </div>
+
+        <!-- 批量处理测试 -->
+        <div id="batchTab" class="tab-content">
+            <div class="upload-section">
+                <h2>批量图像特征提取</h2>
+                <div class="upload-area" id="batchUploadArea">
+                    <div class="upload-placeholder">
+                        <i class="fas fa-images"></i>
+                        <p>拖拽多个图像文件到此处或点击选择</p>
+                        <p class="file-info">支持 JPG, PNG, GIF 格式，最多10张</p>
+                    </div>
+                    <input type="file" id="batchFileInput" accept="image/*" multiple style="display: none;">
+                </div>
+                <div class="batch-preview" id="batchPreview" style="display: none;">
+                    <div class="preview-grid" id="batchPreviewGrid"></div>
+                    <button class="clear-btn" onclick="clearBatchImages()"><i class="fas fa-trash"></i> 清空所有</button>
+                </div>
+                <button id="batchExtractBtn" class="extract-btn" disabled onclick="extractBatchFeatures()">
+                    <i class="fas fa-cogs"></i> 批量提取特征
+                </button>
+            </div>
+            <div class="result-section" id="batchResult" style="display: none;">
+                <h3>批量提取结果</h3>
+                <div class="result-content" id="batchResultContent"></div>
+            </div>
+        </div>
+
+        <!-- 系统信息 -->
+        <div id="infoTab" class="tab-content">
+            <div class="info-section">
+                <h2>系统信息</h2>
+                <button class="info-btn" onclick="getSystemInfo()">
+                    <i class="fas fa-info-circle"></i> 获取系统信息
+                </button>
+                <div class="result-section" id="infoResult" style="display: none;">
+                    <div class="result-content" id="infoResultContent"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 加载指示器 -->
+        <div class="loading-overlay" id="loadingOverlay" style="display: none;">
+            <div class="loading-spinner">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>处理中，请稍候...</p>
+            </div>
+        </div>
+
+        <!-- 错误提示 -->
+        <div class="error-toast" id="errorToast" style="display: none;">
+            <i class="fas fa-exclamation-triangle"></i>
+            <span id="errorMessage"></span>
+            <button onclick="hideError()"><i class="fas fa-times"></i></button>
+        </div>
+
+        <!-- 成功提示 -->
+        <div class="success-toast" id="successToast" style="display: none;">
+            <i class="fas fa-check-circle"></i>
+            <span id="successMessage"></span>
+            <button onclick="hideSuccess()"><i class="fas fa-times"></i></button>
+        </div>
+    </div>
+
+    <script src="/static/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+# Node.js
+node_modules
+build
+dist
+
+# Python
+venv/
+.venv/
+env/
+.env/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+.pytest_cache/
+.coverage
+.tox/
+.cache/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Python dependencies and setup files
+requirements.txt
+setup.py
+setup.cfg
+pyproject.toml
+Poetry.lock
+Pipfile
+Pipfile.lock
+
+# IDE and system files
+.git
+.trae
+*.log
+.DS_Store
+.vscode/
+.idea/
+
+# Test data (keep only necessary files)
+tests/test_data/real_images/
+scripts/
+
+# Keep only essential files for deployment
+# index.html - main entry point
+# test_results/ - generated reports and charts
+# *.json - configuration and data files

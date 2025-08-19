@@ -1,0 +1,152 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+PYTHONPATH
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+.env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# Documentation
+*.md
+README*
+CHANGELOG*
+LICENSE*
+docs/
+
+# Test files
+tests/
+test_*/
+*_test.py
+test_*.py
+pytest.ini
+.pytest_cache/
+.coverage
+.tox/
+
+# Example and demo files
+examples/
+demo/
+sample*/
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.temp
+
+# Data files (unless needed)
+data/
+datasets/
+*.csv
+*.json
+*.xml
+*.yaml
+*.yml
+
+# Model files (if large)
+*.pth
+*.pt
+*.ckpt
+*.h5
+*.pkl
+*.pickle
+
+# Images (unless needed for testing)
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.bmp
+*.tiff
+*.svg
+
+# Docker
+Dockerfile*
+docker-compose*
+.dockerignore
+
+# CI/CD
+.github/
+.gitlab-ci.yml
+.travis.yml
+Jenkinsfile
+
+# Package managers
+node_modules/
+package*.json
+yarn.lock
+
+# Jupyter notebooks
+*.ipynb
+.ipynb_checkpoints/
+
+# Environment files
+.env*
+!.env.example
+
+# Cache
+.cache/
+.mypy_cache/
+.pytest_cache/
+
+# Uploads and generated content
+uploads/
+static/
+media/
+
+# Performance and profiling
+*.prof
+*.lprof
+*.pstats
+
+# Backup files
+*.bak
+*.backup
+*.old
