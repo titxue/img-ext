@@ -1,6 +1,7 @@
 from fastapi import FastAPI, File, UploadFile, HTTPException, status, Query, Request
-from fastapi.responses import JSONResponse, HTMLResponse
+from fastapi.responses import JSONResponse, HTMLResponse, FileResponse
 from fastapi.middleware.cors import CORSMiddleware
+import os
 # from fastapi.staticfiles import StaticFiles  # Vercel部署时注释掉
 # from fastapi.templating import Jinja2Templates  # Vercel部署时注释掉
 from pydantic import BaseModel, Field
@@ -33,6 +34,9 @@ app = FastAPI(
 
 # 设置模板 (Vercel部署时注释掉)
 # templates = Jinja2Templates(directory="templates")
+
+# 获取项目根目录
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # 添加CORS中间件
 app.add_middleware(
@@ -131,15 +135,6 @@ def process_uploaded_image(file_content: bytes) -> Image.Image:
         )
 
 # API端点
-@app.get("/", response_model=dict)
-async def root():
-    """根端点"""
-    return {
-        "message": "图像特征提取API服务",
-        "version": "1.0.0",
-        "docs": "/docs",
-        "health": "/health"
-    }
 
 @app.get("/health", response_model=HealthResponse)
 async def health_check():
@@ -339,9 +334,69 @@ async def get_device_info():
         )
 
 @app.get("/test", response_class=HTMLResponse)
-async def test_page(request: Request):
+async def test_page():
     """测试页面"""
-    return templates.TemplateResponse("test.html", {"request": request})
+    try:
+        test_html_path = os.path.join(BASE_DIR, "templates", "test.html")
+        if os.path.exists(test_html_path):
+            return FileResponse(test_html_path, media_type="text/html")
+        else:
+            raise HTTPException(status_code=404, detail="测试页面未找到")
+    except Exception as e:
+        logger.error(f"加载测试页面失败: {str(e)}")
+        raise HTTPException(status_code=500, detail="无法加载测试页面")
+
+@app.get("/static/{file_path:path}")
+async def serve_static_files(file_path: str):
+    """服务静态文件"""
+    try:
+        static_file_path = os.path.join(BASE_DIR, "static", file_path)
+        if os.path.exists(static_file_path) and os.path.isfile(static_file_path):
+            # 根据文件扩展名设置媒体类型
+            if file_path.endswith('.css'):
+                media_type = "text/css"
+            elif file_path.endswith('.js'):
+                media_type = "application/javascript"
+            elif file_path.endswith(('.png', '.jpg', '.jpeg')):
+                media_type = "image/*"
+            elif file_path.endswith('.svg'):
+                media_type = "image/svg+xml"
+            else:
+                media_type = "application/octet-stream"
+            
+            return FileResponse(static_file_path, media_type=media_type)
+        else:
+            raise HTTPException(status_code=404, detail="静态文件未找到")
+    except Exception as e:
+        logger.error(f"加载静态文件失败: {str(e)}")
+        raise HTTPException(status_code=500, detail="无法加载静态文件")
+
+@app.get("/index.html", response_class=HTMLResponse)
+@app.get("/", response_class=HTMLResponse)
+async def serve_index():
+    """服务主页"""
+    try:
+        index_html_path = os.path.join(BASE_DIR, "index.html")
+        if os.path.exists(index_html_path):
+            return FileResponse(index_html_path, media_type="text/html")
+        else:
+            # 如果没有index.html，返回API信息
+            return JSONResponse({
+                "message": "图像特征提取API服务",
+                "version": "1.0.0",
+                "docs": "/docs",
+                "health": "/health",
+                "test": "/test"
+            })
+    except Exception as e:
+        logger.error(f"加载主页失败: {str(e)}")
+        return JSONResponse({
+            "message": "图像特征提取API服务",
+            "version": "1.0.0",
+            "docs": "/docs",
+            "health": "/health",
+            "test": "/test"
+        })
 
 # 全局异常处理器
 @app.exception_handler(Exception)
