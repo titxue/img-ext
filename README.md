@@ -5,7 +5,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![macOS](https://img.shields.io/badge/macOS-12.3%2B-lightgrey.svg)](https://www.apple.com/macos/)
 [![MPS Accelerated](https://img.shields.io/badge/MPS-Accelerated-green.svg)](https://developer.apple.com/metal/)
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/yourusername/img-ext)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/titxue/img-ext)
 
 一个高性能的图像特征提取器，专门为Mac M系列芯片优化，支持MPS (Metal Performance Shaders) 加速。基于ResNet-18架构，提供512维特征向量提取，适用于图像相似性分析、聚类和检索任务。
 
