@@ -19,7 +19,7 @@
       "dest": "/templates/$1"
     },
     {
-      "src": "/(index\.html|favicon\.ico|robots\.txt)$",
+      "src": "/(index.html|favicon.ico|robots.txt)$",
       "dest": "/$1"
     },
     {
@@ -41,7 +41,7 @@
   ],
   "headers": [
     {
-      "source": "/(.*\\.(css|js|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot))$",
+      "source": "/(.*.(css|js|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot))$",
       "headers": [
         {
           "key": "Cache-Control",
@@ -50,7 +50,7 @@
       ]
     },
     {
-      "source": "/(.*\\.html)$",
+      "source": "/(.*.html)$",
       "headers": [
         {
           "key": "Cache-Control",
